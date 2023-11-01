@@ -7,17 +7,9 @@
 // 8 4 2 4
 // 17 -> такого числа в массиве нет
 
-using System.Reflection.PortableExecutable;
-
-Console.Write("Введите количество строк в массиве: ");
-int rows = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите количество столбцов в массиве: ");
-int columns = Convert.ToInt32(Console.ReadLine());
-
-
-int[,] GetMatrix(int m, int n, int minValue, int maxValue)
+int[,] GetMatrix(int rows, int cols, int minValue, int maxValue)
 {
-    int[,] matrix = new int[m, n];
+    int[,] matrix = new int[rows,cols];
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
         for (int j = 0; j < matrix.GetLength(1); j++)
@@ -40,54 +32,34 @@ void PrintMatrix(int[,] matr)
     }
 }
 
-// bool CheckLines(int x, int y, double b2, double k2)
-// {
-//     if (k1 == k2)
-//     {
-//         if (b1 == b2)
-//         {
-//             Console.WriteLine("Прямые совпадают!");
-//             return false;
-//         }
-//         else
-//         {
-//             Console.WriteLine("Прямые параллельны!");
-//             return false;
-//         }
-//     }
-//     return true;
-// }
-
-
-
-int FindElements(int[,] matr)
+int FindElements(int[,] matr, int x, int y)
 {
-    Console.WriteLine("Введите номер строки, где должен находиться искомый элемент: ");
-    int x = (Convert.ToInt32(Console.ReadLine()) - 1);
-    Console.WriteLine("Введите номер столбца, где должен находиться искомый элемент: ");
-    int y = (Convert.ToInt32(Console.ReadLine()) - 1);
     int res = 0;
-    for (int i = 0; i < matr.GetLength(0); i++)
     {
-        if (x == i)
+        for (int i = 0; i < matr.GetLength(0); i++)
         {
             for (int j = 0; j < matr.GetLength(1); j++)
-            {
-                if (y == j)
-                {
-                    res = matr[x, y];
-                }
-            }
+                res = matr[x - 1, y - 1];
         }
-        else
-        {
-            Console.WriteLine("Такого элемента в массиве нет!");
-        }
-    }
-    return res;
+    }         
+   
+return res;
 }
 
+Console.Write("Введите количество строк в массиве: ");
+int rows = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество столбцов в массиве: ");
+int cols = Convert.ToInt32(Console.ReadLine());
 
-int[,] array2D = GetMatrix(rows, columns, 0, 10);
+int[,] array2D = GetMatrix(rows, cols, 0, 10);
 PrintMatrix(array2D);
-Console.WriteLine($"-> {FindElements(array2D)}");
+
+Console.WriteLine("Введите номер строки, где должен находиться искомый элемент: ");
+int x = (Convert.ToInt32(Console.ReadLine()));
+Console.WriteLine("Введите номер столбца, где должен находиться искомый элемент: ");
+int y = (Convert.ToInt32(Console.ReadLine()));
+if (x <= rows || y <=  cols)
+{
+    Console.WriteLine($"Значение элемента двумерного массива с позициями [{x}, {y}] -> {FindElements(array2D, x, y)}.");
+}         
+    else Console.WriteLine("Такого элемента в массиве нет!");

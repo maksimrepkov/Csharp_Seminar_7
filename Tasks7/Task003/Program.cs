@@ -34,15 +34,15 @@ void PrintMatrix(int[,] matr)
 double[] FindSredArifColomns(int[,] matr)
 {
     double[] srednee = new double[matr.GetLength(1)];
-    int res = 0;
+    int sum = 0;
     for (int j = 0; j < matr.GetLength(1); j++)
     {
-        res = 0;
+        sum = 0;
         for (int i = 0; i < matr.GetLength(0); i++)
         {
-           res = res + matr[i, j]; 
+           sum = sum + matr[i, j]; 
         }
-        srednee[j] = res / matr.GetLength(0);
+        srednee[j] = sum / matr.GetLength(0);
     }
     return srednee;
 }
